@@ -13,17 +13,17 @@ size_t print_dlistint(const dlistint_t *h)
 
 	arry = 0;
 
-	if (i == NULL)
+	if (h == NULL)
 		return (arry);
 
-	while (i->prev != NULL)
-		i = i->prev;
+	while (h->prev != NULL)
+		h = h->prev;
 
-	while (i != NULL)
+	while (h != NULL)
 	{
-		printf("%d\n", i->n);
+		printf("%d\n", h->n);
 		arry++;
-		i = i->next;
+		h = h->next;
 	}
 
 	return (arry);
