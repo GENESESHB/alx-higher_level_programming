@@ -4,6 +4,6 @@
 def for this moduls the function can copy the list.
 """
 
-def copy_list(l):
+def copy_list(my_list):
 
-    return l.copy()
+    return my_list.copy()
