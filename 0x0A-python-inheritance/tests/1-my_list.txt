@@ -70,4 +70,3 @@ Numbers:
    >>> my_list.append(NULL)
    Traceback (most recent call last):
    NameError: name 'NULL' is not defined
-
