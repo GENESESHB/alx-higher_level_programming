@@ -161,3 +161,53 @@ Contents of "my_dict.json":
 ```
 
 Note that the code doesn't handle exceptions for cases where the object cannot be serialized or file permission exceptions.
+
+
+
+# Here's the implementation of the `load_from_json_file` function that creates an object from a JSON file:
+
+```python
+import json
+
+def load_from_json_file(filename):
+    with open(filename, 'r') as file:
+        json_data = file.read()
+        obj = json.loads(json_data)
+        return obj
+```
+
+This function takes a `filename` as input and reads the contents of the file using the `open` function within a `with` statement. It then reads the file data using `file.read()` and uses `json.loads()` to parse the JSON data and convert it into a Python object. Finally, it returns the created object.
+
+Note that exceptions related to file permissions or file not found are not managed in this implementation, as specified in the requirements.
+
+You can use this function as shown in the example you provided:
+
+```python
+filename = "my_list.json"
+my_list = load_from_json_file(filename)
+print(my_list)
+print(type(my_list))
+
+filename = "my_dict.json"
+my_dict = load_from_json_file(filename)
+print(my_dict)
+print(type(my_dict))
+
+try:
+    filename = "my_set_doesnt_exist.json"
+    my_set = load_from_json_file(filename)
+    print(my_set)
+    print(type(my_set))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
+
+try:
+    filename = "my_fake.json"
+    my_fake = load_from_json_file(filename)
+    print(my_fake)
+    print(type(my_fake))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
+```
+
+This code will load the JSON data from the specified files and print the loaded objects along with their types. It also handles exceptions if the file doesn't exist or if the JSON string doesn't represent a valid object.
