@@ -26,4 +26,14 @@ This function uses the `with` statement to open the file in write mode, writes t
 
 You can call this function with the desired filename and text to write the content to the file and obtain the number of characters written.
 
-Let me know if there's anything else I can help you with!
+
+
+# Here is a Python function that appends a string at the end of a text file (UTF8) and returns the number of characters added:
+
+```python
+def append_write(filename="", text=""):
+    with open(filename, mode='a', encoding='utf-8') as file:
+        return file.write(text)
+```
+
+If the file doesn’t exist, it will be created. The function uses the with statement to ensure that the file is closed when the block inside the with statement is exited. You don’t need to manage file permission or file doesn't exist exceptions. Also, you are not allowed to import any models
