@@ -37,3 +37,15 @@ def append_write(filename="", text=""):
 ```
 
 If the file doesn’t exist, it will be created. The function uses the with statement to ensure that the file is closed when the block inside the with statement is exited. You don’t need to manage file permission or file doesn't exist exceptions. Also, you are not allowed to import any models
+
+
+# Here’s a Python function that returns the JSON representation of an object (string):
+
+```python
+import json
+
+def to_json_string(my_obj):
+    return json.dumps(my_obj)
+```
+
+This function uses the built-in JSON library in Python. The json.dumps() method is used to convert a Python object into a JSON string. If the object cannot be serialized, no exception is raised.
