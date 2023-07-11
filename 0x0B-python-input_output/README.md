@@ -99,4 +99,65 @@ This will output:
 [ValueError] Expecting property name enclosed in double quotes: line 2 column 25 (char 25)
 ```
 
-Note that the `json.loads()` function may raise a `ValueError` if the JSON string is not properly formatted. You can handle this exception to manage cases where the JSON string doesn't represent an object, as mentioned in the prompt.
+Note that the `json.loads()` function may raise a `ValueError` if the JSON string is not properly formatted. You can handle this exception to manage cases where the JSON string doesn't represent an object,
+
+
+#  Here's the implementation of the `save_to_json_file` function in Python:
+
+```python
+import json
+
+def save_to_json_file(my_obj, filename):
+    with open(filename, 'w') as file:
+        json.dump(my_obj, file)
+```
+
+The `save_to_json_file` function takes two parameters: `my_obj`, which is the object to be saved to the file, and `filename`, which is the name of the file to save the object to.
+
+Within the function, the `open()` function is used to open the file in write mode. The `json.dump()` function is then used to serialize the object (`my_obj`) and write it to the file in JSON format.
+
+The function utilizes the `with` statement, which ensures that the file is automatically closed after the operation, even if an exception occurs.
+
+Here's an example usage of the function based on the code snippet you provided:
+
+```python
+filename = "my_list.json"
+my_list = [1, 2, 3]
+save_to_json_file(my_list, filename)
+
+filename = "my_dict.json"
+my_dict = { 
+    'id': 12,
+    'name': "John",
+    'places': [ "San Francisco", "Tokyo" ],
+    'is_active': True,
+    'info': {
+        'age': 36,
+        'average': 3.14
+    }
+}
+save_to_json_file(my_dict, filename)
+
+try:
+    filename = "my_set.json"
+    my_set = { 132, 3 }
+    save_to_json_file(my_set, filename)
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
+```
+
+This code will save the `my_list` object to the file "my_list.json", the `my_dict` object to the file "my_dict.json", and attempt to save the `my_set` object to the file "my_set.json". However, since sets are not JSON serializable, it will raise a `TypeError` exception.
+
+The resulting files will contain the JSON representation of the respective objects:
+
+Contents of "my_list.json":
+```
+[1, 2, 3]
+```
+
+Contents of "my_dict.json":
+```
+{"name": "John", "places": ["San Francisco", "Tokyo"], "id": 12, "info": {"average": 3.14, "age": 36}, "is_active": true}
+```
+
+Note that the code doesn't handle exceptions for cases where the object cannot be serialized or file permission exceptions.
