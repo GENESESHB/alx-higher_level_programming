@@ -211,3 +211,48 @@ except Exception as e:
 ```
 
 This code will load the JSON data from the specified files and print the loaded objects along with their types. It also handles exceptions if the file doesn't exist or if the JSON string doesn't represent a valid object.
+
+
+#  Here's an example of how you can use the `class_to_json` function from the provided solution, along with a sample class, and the corresponding input and output.
+
+`my_class.py`:
+```python
+class MyClass:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"MyClass(name={self.name}, age={self.age})"
+```
+
+`main.py`:
+```python
+from my_class import MyClass
+from class_to_json import class_to_json
+
+# Create an instance of MyClass
+obj = MyClass("John", 25)
+
+# Serialize the object to JSON representation
+json_data = class_to_json(obj)
+
+# Print the output
+print(json_data)
+```
+
+Output:
+```
+{'name': 'John', 'age': 25}
+```
+
+Explanation:
+In this example, we have a class `MyClass` defined in `my_class.py`. The class has two attributes, `name` and `age`, along with an overridden `__str__` method.
+
+In `main.py`, we import the `MyClass` and `class_to_json` functions. We create an instance of `MyClass` with the name "John" and age 25.
+
+Next, we call the `class_to_json` function with the `obj` instance as an argument, which returns the JSON-compatible dictionary representation of the object.
+
+Finally, we print the `json_data` dictionary, which represents the serialized object in JSON format.
+
+The output shows the resulting dictionary with the attributes `'name'` and `'age'` and their corresponding values, `'John'` and `25`, respectively.
