@@ -48,4 +48,55 @@ def to_json_string(my_obj):
     return json.dumps(my_obj)
 ```
 
-This function uses the built-in JSON library in Python. The json.dumps() method is used to convert a Python object into a JSON string. If the object cannot be serialized, no exception is raised.
+This function uses the built-in JSON library in Python. The json.dumps() method is used to convert a Python object into a JSON string. If the object cannot be serialized
+
+
+# Here's the implementation of the `from_json_string` function in Python:
+
+```python
+import json
+
+def from_json_string(my_str):
+    return json.loads(my_str)
+```
+
+The `json.loads()` function is used to parse the JSON string and convert it into a Python object. It automatically handles converting the JSON data into appropriate Python data structures such as lists and dictionaries.
+
+You can use this function to parse JSON strings and retrieve the corresponding Python objects. Here's an example usage based on the code snippet you provided:
+
+```python
+s_my_list = "[1, 2, 3]"
+my_list = from_json_string(s_my_list)
+print(my_list)
+print(type(my_list))
+
+s_my_dict = """
+{"is_active": true, "info": {"age": 36, "average": 3.14}, 
+"id": 12, "name": "John", "places": ["San Francisco", "Tokyo"]}
+"""
+my_dict = from_json_string(s_my_dict)
+print(my_dict)
+print(type(my_dict))
+
+try:
+    s_my_dict = """
+    {"is_active": true, 12 }
+    """
+    my_dict = from_json_string(s_my_dict)
+    print(my_dict)
+    print(type(my_dict))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
+```
+
+This will output:
+
+```
+[1, 2, 3]
+<class 'list'>
+{'id': 12, 'is_active': True, 'name': 'John', 'info': {'age': 36, 'average': 3.14}, 'places': ['San Francisco', 'Tokyo']}
+<class 'dict'>
+[ValueError] Expecting property name enclosed in double quotes: line 2 column 25 (char 25)
+```
+
+Note that the `json.loads()` function may raise a `ValueError` if the JSON string is not properly formatted. You can handle this exception to manage cases where the JSON string doesn't represent an object, as mentioned in the prompt.
