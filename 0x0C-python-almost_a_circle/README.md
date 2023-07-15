@@ -3,7 +3,8 @@
 
 # =>>the first class Base:
 
-  ```Here's the complete code:
+  ```
+Here's the complete code:
   ```
 
 ```python
@@ -41,8 +42,9 @@ Note that this code assumes it is part of a module and does not include a `main`
 
 # =>the class Rectangle that inherits from Base:
 
-```in this tasks we have initialisation a new rectangle and we wanna a id() for rectangle that maens we imports the models of class Base: because he hase a difination of id() and we use the By calling super().__init__(id), the Rectangle class inherits and utilizes the initialization logic defined in the __init__ method of the Base class. This allows the Rectangle class to benefit from any common setup or shared functionality provided by the Base class.
-```
+`
+in this tasks we have initialisation a new rectangle and we wanna a id() for rectangle that maens we imports the models of class Base: because he hase a difination of id() and we use the By calling super().__init__(id), the Rectangle class inherits and utilizes the initialization logic defined in the __init__ method of the Base class. This allows the Rectangle class to benefit from any common setup or shared functionality provided by the Base class.
+`
 
 To implement the `Rectangle` class that inherits from `Base` and includes private instance attributes with getters and setters, you can create a new file called `rectangle.py` inside the `models` directory. Here's an example implementation:
 
