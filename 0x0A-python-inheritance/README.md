@@ -6,7 +6,7 @@ You can utilize the concepts of Python inheritance in various scenarios,
 
 Here's an #example: of how you could use Python inheritance in the context of an Android APK development:
 
-1. Define a base class that represents a generic component of your application, such as a "UIElement" class.
+`1. Define a base class that represents a generic component of your application, such as a "UIElement" class.`
 
 ```python
 class UIElement:
