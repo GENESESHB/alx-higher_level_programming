@@ -1,14 +1,6 @@
-# 0x0C-python-almost_a_circle
-
-
-# =>>the first class Base:
-
-  ```Here's the complete code:
-  ```
-
-```python
 #!/usr/bin/python3
 """Defines a base model class."""
+
 
 class Base:
     """Represent the base model.
@@ -32,8 +24,3 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
-```
-
-This code defines a base model class named `Base` with a class variable `__nb_objects` and an initializer method `__init__`. The class variable `__nb_objects` keeps track of the number of instantiated `Base` objects, and the `__init__` method assigns unique identifiers to each object.
-
-Note that this code assumes it is part of a module and does not include a `main` section or demonstrate the usage of the `Base` class.
