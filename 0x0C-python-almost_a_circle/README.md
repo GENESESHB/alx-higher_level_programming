@@ -122,3 +122,24 @@ The constructor (`__init__`) initializes the `Rectangle` object by calling the s
 The getters and setters provide controlled access to the private attributes, allowing validation or additional logic to be implemented if needed.
 
 The provided `main.py` script demonstrates how to use the `Rectangle` class by creating instances and printing their IDs.
+
+# Area first
+
+`
+ in this steep we have now to calculate the area of we rectangle and in here we have some thing 
+like class base and defined id() and we rectangle with all exiption in file ; that means we have now to adds the area of triangle
+`
+
+```
+area it s the all space in the triangle
+def area(self):
+    """
+    self.__width : it s the value of width
+    self.__height : it s te value of height
+    """
+    return self.__width * self.__height
+```
+
+`
+in this file we have juste return the value of methode calculator of area
+`
