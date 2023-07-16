@@ -187,3 +187,31 @@ This line of code is responsible for printing the rectangle. Let's break it down
 The resulting string is printed, which displays the rectangle using `#` symbols. The `__x` and `__y` attributes are used to control the position where the rectangle is printed on the screen.
 
 Overall, the `display` method allows you to visualize the rectangle by printing it with `#` symbols, taking into account its width, height, x-coordinate, and y-coordinate.
+
+# __str__
+
+`
+the __str__ method so that it returns [Rectangle] (<id>) <x>/<y> - <width>/<height>
+`
+
+The updated code you provided for the `__str__` method of the `Rectangle` class is correct. Here's the revised code for your reference:
+
+```python
+def __str__(self):
+    """Prints [Rectangle] (<id>) <x>/<y> - <width>/<height>"""
+    return "[{:s}] ({:d}) {:d}/{:d} - {:d}/{:d}".format(
+        self.__class__.__name__, self.id,
+        self.__x, self.__y,
+        self.__width, self.__height)
+```
+
+This implementation uses the `format` method of a string to create the desired string representation. It includes the class name, rectangle ID, x-coordinate, y-coordinate, width, and height of the rectangle. The `self.__class__.__name__` expression retrieves the name of the class dynamically, allowing the code to work correctly even if the class name changes.
+
+With this code, when you print a `Rectangle` object, it will display the information in the specified format. For example:
+
+```python
+r1 = Rectangle(4, 6, 2, 1, 12)
+print(r1)  # [Rectangle] (12) 2/1 - 4/6
+```
+
+This will print `[Rectangle] (12) 2/1 - 4/6`, which matches the desired output you provided.
