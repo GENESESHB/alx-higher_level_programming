@@ -90,3 +90,11 @@ class Rectangle(Base):
             area == self.__height * self.__width
         """
         return self.__width * self.__height
+
+    def display(self):
+        """ print the area of rectangle with # """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        print("\n" * self.__y +
+              "\n".join(" " * self.__x + "#" * self.__width
+                        for rows in range(self.__height)))

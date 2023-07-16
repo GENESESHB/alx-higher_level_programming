@@ -142,4 +142,48 @@ def area(self):
 
 `
 in this file we have juste return the value of methode calculator of area
+
+
+# Display #0
+
 `
+dispaly it s a function can return the area of the code by editing hem to be like # area
+`
+
+The code you provided defines a `display` method for a `Rectangle` class. Let's analyze it step by step:
+
+```python
+def display(self):
+    """ Prints rectangle with #'s """
+```
+
+The method is called `display` and has a docstring that describes its purpose, which is to print the rectangle using `#` symbols.
+
+```python
+if self.__width == 0 or self.__height == 0:
+    return ""
+```
+
+This check ensures that if either the width or height of the rectangle is zero, an empty string is returned. This prevents printing an empty rectangle.
+
+```python
+print("\n" * self.__y +
+      "\n".join(" " * self.__x + "#" * self.__width
+                for rows in range(self.__height)))
+```
+
+This line of code is responsible for printing the rectangle. Let's break it down further:
+
+- `"\n" * self.__y` adds newline characters based on the y-coordinate of the rectangle. This moves the printing cursor to the correct row.
+
+- `"\n".join(...)` joins the generated lines of the rectangle with newline characters.
+
+- `" " * self.__x` adds whitespace characters based on the x-coordinate of the rectangle. This moves the printing cursor to the correct column.
+
+- `"#" * self.__width` creates a string of `#` characters with a length equal to the width of the rectangle.
+
+- `for rows in range(self.__height)` iterates over the range of the rectangle's height to generate each row of the rectangle.
+
+The resulting string is printed, which displays the rectangle using `#` symbols. The `__x` and `__y` attributes are used to control the position where the rectangle is printed on the screen.
+
+Overall, the `display` method allows you to visualize the rectangle by printing it with `#` symbols, taking into account its width, height, x-coordinate, and y-coordinate.
