@@ -4,6 +4,12 @@ Defines unittests for base.py.
 # run with python3 -m unittest discover tests
 # run with python3 -m unittest tests/test_models/test_base.py
 """
+
+import unittest
+
+from models.base import Base
+
+
 import os
 import pep8
 import json

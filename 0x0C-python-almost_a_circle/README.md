@@ -215,3 +215,78 @@ print(r1)  # [Rectangle] (12) 2/1 - 4/6
 ```
 
 This will print `[Rectangle] (12) 2/1 - 4/6`, which matches the desired output you provided.
+
+
+# Update #0
+
+`
+ method def update(self, *args): that assigns an argument to each attribute:
+
+1st argument should be the id attribute
+2nd argument should be the width attribute
+3rd argument should be the height attribute
+4th argument should be the x attribute
+5th argument should be the y attribute
+`
+
+Certainly! Here's the code for the `update` function and the main file with an explanation:
+
+**rectangle.py**:
+```python
+def update(rectangle, *args):
+    num_args = len(args)
+    if num_args >= 1:
+        rectangle['id'] = args[0]
+    if num_args >= 2:
+        rectangle['width'] = args[1]
+    if num_args >= 3:
+        rectangle['height'] = args[2]
+    if num_args >= 4:
+        rectangle['x'] = args[3]
+    if num_args >= 5:
+        rectangle['y'] = args[4]
+```
+
+The `update` function takes a `rectangle` dictionary as the first argument and variable-length arguments (`*args`). It modifies the attributes of the `rectangle` dictionary based on the arguments provided. Each argument is assigned to the corresponding attribute of the rectangle. The order of the arguments is important as per the requirements.
+
+**main.py**:
+```python
+from rectangle import update
+
+if __name__ == "__main__":
+    rectangle = {'id': 1, 'width': 10, 'height': 10, 'x': 10, 'y': 10}
+
+    print(rectangle)
+
+    update(rectangle, 89)
+    print(rectangle)
+
+    update(rectangle, 89, 2)
+    print(rectangle)
+
+    update(rectangle, 89, 2, 3)
+    print(rectangle)
+
+    update(rectangle, 89, 2, 3, 4)
+    print(rectangle)
+
+    update(rectangle, 89, 2, 3, 4, 5)
+    print(rectangle)
+```
+
+The `main.py` file demonstrates the usage of the `update` function to modify the attributes of a rectangle dictionary.
+
+1. We create a `rectangle` dictionary with initial attribute values.
+2. `print(rectangle)` displays the initial rectangle details.
+3. `update(rectangle, 89)` modifies the `id` attribute of the `rectangle` dictionary to 89.
+4. `print(rectangle)` shows the updated rectangle.
+5. `update(rectangle, 89, 2)` changes the `width` attribute to 2.
+6. `print(rectangle)` displays the updated rectangle.
+7. `update(rectangle, 89, 2, 3)` modifies the `height` attribute to 3.
+8. `print(rectangle)` shows the updated rectangle.
+9. `update(rectangle, 89, 2, 3, 4)` changes the `x` attribute to 4.
+10. `print(rectangle)` displays the modified rectangle.
+11. `update(rectangle, 89, 2, 3, 4, 5)` modifies the `y` attribute to 5.
+12. `print(rectangle)` shows the final modified rectangle.
+
+In summary, the code demonstrates the usage of the `update` function to modify the attributes of a rectangle dictionary and displays the rectangle's details after each update.
