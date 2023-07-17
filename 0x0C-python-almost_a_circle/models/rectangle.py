@@ -108,7 +108,7 @@ class Rectangle(Base):
                         self.__x, self.__y,
                         self.__width, self.__height)
 
-         def update(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
         """
         If args: set attributes in this order: id, width, height, x, y
         If no args given: set attributes according to kwargs
@@ -147,4 +147,3 @@ class Rectangle(Base):
         dic["x"] = self.x
         dic["y"] = self.y
         return dic
-
