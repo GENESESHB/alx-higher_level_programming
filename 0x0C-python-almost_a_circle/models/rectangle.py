@@ -107,3 +107,44 @@ class Rectangle(Base):
                         self.__class__.__name__, self.id,
                         self.__x, self.__y,
                         self.__width, self.__height)
+
+         def update(self, *args, **kwargs):
+        """
+        If args: set attributes in this order: id, width, height, x, y
+        If no args given: set attributes according to kwargs
+        """
+        if args:
+            for key, value in enumerate(args):
+                if key == 0:
+                    self.id = value
+                elif key == 1:
+                    self.width = value
+                elif key == 2:
+                    self.height = value
+                elif key == 3:
+                    self.x = value
+                else:
+                    self.y = value
+        else:
+            for k, v in kwargs.items():
+                if k == "id":
+                    self.id = v
+                if k == "width":
+                    self.width = v
+                if k == "height":
+                    self.height = v
+                if k == "x":
+                    self.x = v
+                if k == "y":
+                    self.y = v
+
+    def to_dictionary(self):
+        """Return dictionary representation"""
+        dic = {}
+        dic["id"] = self.id
+        dic["width"] = self.width
+        dic["height"] = self.height
+        dic["x"] = self.x
+        dic["y"] = self.y
+        return dic
+
