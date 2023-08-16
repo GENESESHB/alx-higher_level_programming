@@ -1,6 +1,9 @@
-# 0x0E-SQL_more_queries :dolphin: :sharks:
+# 0x0E-SQL_more_queries :dolphin:
 
-## Tasks :page_with_curl:
+![SQL_more](https://velog.velcdn.com/images/julia/post/e886c682-008a-4d6f-965f-d36d7bfe113c/sql-join.png)
+
+
+## Tasks :page:
 
 * **0. My privileges!**
   * [0-privileges.sql](./0-privileges.sql): MySQL script that lists all privileges of the users
