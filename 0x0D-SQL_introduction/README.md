@@ -1,8 +1,8 @@
-# SQL - Introduction
+# SQL - Introduction :house:
+# :SQL:
 
-This was my first project in which I began to work with SQL and relational
-databases. I began practicing introductory data definition and data
-manipulation language, making subqueries, and using functions.
+![structure_query_langae](https://th.bing.com/th/id/R.f96618ea27ba07ee0e48e3d8d998d149?rik=cwy8e57Ayu%2fxlA&pid=ImgRaw&r=0)
+
 
 ## Usage :dolphin:
 
