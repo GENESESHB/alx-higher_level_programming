@@ -3,7 +3,7 @@
 ![SQL_more](https://velog.velcdn.com/images/julia/post/e886c682-008a-4d6f-965f-d36d7bfe113c/sql-join.png)
 
 
-## Tasks :page:
+## Tasks :computer:
 
 * **0. My privileges!**
   * [0-privileges.sql](./0-privileges.sql): MySQL script that lists all privileges of the users
