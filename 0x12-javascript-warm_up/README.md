@@ -1,9 +1,11 @@
-# Mon Projet
+![js](https://i0.wp.com/hanamon.kr/wp-content/uploads/2021/12/javascript-logo.jpeg?resize=980%2C551&ssl=1)
 
-Bienvenue dans mon projet passionnant ! Voici la vidéo de démonstration intégrée :
+# 0x12. JavaScript - Warm up
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DHjqpvDnNGE?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+# Resurces
 
-Pour en savoir plus, consultez la vidéo complète sur [YouTube](https://youtu.be/DHjqpvDnNGE?si=1WzSDMNZOZslNftR).
+
+# tasks 🚀
+
 
 
