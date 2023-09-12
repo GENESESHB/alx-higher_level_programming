@@ -91,3 +91,41 @@ console.log(rect2.height); // Output: undefined
 ```
 
 In the example above, we first create a `Rectangle` object `rect1` with valid dimensions (10 and 20), and it sets the `width` and `height` properties accordingly. Then, we create another `Rectangle` object `rect2` with dimensions that are not valid (-5 and 30), so the constructor does not set the properties, and they remain `undefined`;
+
+
+# ``SQUARE`` & ``Rectangle``
+
+
+```javascript
+#!/usr/bin/node
+module.exports = class Rectangle {
+  constructor(w, h) {
+    if (w > 0 && h > 0) {
+      [this.width, this.height] = [w, h];
+    }
+  }
+
+  print() {
+    for (let i = 0; i < this.height; i++) console.log('X'.repeat(this.width));
+  }
+};
+```
+
+Now, let's create an example script that uses this class and prints out the rectangle:
+
+```javascript
+const Rectangle = require('./your-rectangle-file.js'); // Replace 'your-rectangle-file.js' with the actual filename.
+
+const rect1 = new Rectangle(5, 3);
+rect1.print();
+```
+
+The expected output when you run this script with `node` should be a rectangle made of "X" characters:
+
+```
+XXXXX
+XXXXX
+XXXXX
+```
+
+In this example, we create a `Rectangle` object `rect1` with dimensions 5 (width) and 3 (height), and then we call the `print` method to display the rectangle. The `print` method prints a rectangle with the specified dimensions, using "X" characters for the shape.
