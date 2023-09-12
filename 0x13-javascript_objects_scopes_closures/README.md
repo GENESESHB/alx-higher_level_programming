@@ -62,3 +62,32 @@ const myRectangle = new Rectangle(10, 20); // Create a rectangle with width 10 a
 console.log(myRectangle.width); // Output: 10
 console.log(myRectangle.height); // Output: 20
 ```
+# class and ``if`` statement
+
+
+```javascript
+#!/usr/bin/node
+module.exports = class Rectangle {
+  constructor (w, h) {
+    if (w > 0 && h > 0) {
+      [this.width, this.height] = [w, h];
+    }
+  }
+};
+```
+
+This code defines a `Rectangle` class with a constructor that sets the `width` and `height` properties if both `w` and `h` are greater than 0. Let's create an example script that uses this class and prints out the properties:
+
+```javascript
+const Rectangle = require('./your-rectangle-file.js'); // Replace 'your-rectangle-file.js' with the actual filename.
+
+const rect1 = new Rectangle(10, 20);
+console.log(rect1.width); // Output: 10
+console.log(rect1.height); // Output: 20
+
+const rect2 = new Rectangle(-5, 30);
+console.log(rect2.width); // Output: undefined
+console.log(rect2.height); // Output: undefined
+```
+
+In the example above, we first create a `Rectangle` object `rect1` with valid dimensions (10 and 20), and it sets the `width` and `height` properties accordingly. Then, we create another `Rectangle` object `rect2` with dimensions that are not valid (-5 and 30), so the constructor does not set the properties, and they remain `undefined`;
