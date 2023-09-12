@@ -197,3 +197,69 @@ XXXXXX
 ```
 
 In this example, we create a `Rectangle` object `rect1` with dimensions 5 (width) and 3 (height). We then demonstrate the `rotate` and `double` methods. The `rotate` method swaps the `width` and `height`, and the `double` method doubles both the `width` and `height` of the rectangle. The `print` method is used to display the rectangle at each step.
+
+# ||``inheritance`` = ``extends&super``
+
+👨‍💻
+
+```javascript
+#!/usr/bin/node
+module.exports = class Square extends require('./4-rectangle.js') {
+  constructor(size) {
+    super(size, size);
+  }
+};
+```
+
+And assuming that your `4-rectangle.js` module exports a `Rectangle` class with a `print` method, you can create a script to use the `Square` class and display the output. Here's an example:
+
+**4-rectangle.js** (Assuming this is your `Rectangle` class)
+
+```javascript
+class Rectangle {
+  constructor(w, h) {
+    this.width = w;
+    this.height = h;
+  }
+
+  print() {
+    for (let i = 0; i < this.height; i++) {
+      console.log('X'.repeat(this.width));
+    }
+  }
+}
+
+module.exports = Rectangle;
+```
+
+**square.js** (Your script using the `Square` class)
+
+```javascript
+const Square = require('./your-square-file.js'); // Replace 'your-square-file.js' with the actual filename.
+
+const square1 = new Square(5);
+console.log("Square 1:");
+square1.print();
+
+const square2 = new Square(3);
+console.log("\nSquare 2:");
+square2.print();
+```
+
+The expected output when you run the `square.js` script with `node` should be as follows:
+
+```
+Square 1:
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+
+Square 2:
+XXX
+XXX
+XXX
+```
+
+In this output, `square1` has a size of 5, and `square2` has a size of 3. The `print` method of the `Rectangle` class is used to display the squares.
