@@ -129,3 +129,71 @@ XXXXX
 ```
 
 In this example, we create a `Rectangle` object `rect1` with dimensions 5 (width) and 3 (height), and then we call the `print` method to display the rectangle. The `print` method prints a rectangle with the specified dimensions, using "X" characters for the shape.
+
+# SAUARE && ``rotate&double``
+
+Your code defines a `Rectangle` class with additional methods `rotate` and `double` in addition to the existing `constructor` and `print` methods. Here's your code:
+
+```javascript
+#!/usr/bin/node
+module.exports = class Rectangle {
+  constructor(w, h) {
+    if (w > 0 && h > 0) {
+      [this.width, this.height] = [w, h];
+    }
+  }
+
+  print() {
+    for (let i = 0; i < this.height; i++) console.log('X'.repeat(this.width));
+  }
+
+  rotate() {
+    [this.width, this.height] = [this.height, this.width];
+  }
+
+  double() {
+    [this.width, this.height] = [this.width * 2, this.height * 2];
+  }
+};
+```
+
+Now, let's create an example script that uses this extended class and demonstrates the `rotate` and `double` methods:
+
+```javascript
+const Rectangle = require('./your-rectangle-file.js'); // Replace 'your-rectangle-file.js' with the actual filename.
+
+const rect1 = new Rectangle(5, 3);
+console.log("Original:");
+rect1.print();
+
+rect1.rotate();
+console.log("\nAfter Rotate:");
+rect1.print();
+
+rect1.double();
+console.log("\nAfter Double:");
+rect1.print();
+```
+
+The expected output when you run this script with `node` should be as follows:
+
+```
+Original:
+XXXXX
+XXXXX
+XXXXX
+
+After Rotate:
+XXX
+XXX
+XXX
+XXX
+XXX
+
+After Double:
+XXXXXX
+XXXXXX
+XXXXXX
+```
+
+In this example, we create a `Rectangle` object `rect1` with dimensions 5 (width) and 3 (height). We then demonstrate the `rotate` and `double` methods. The `rotate` method swaps the `width` and `height`, and the `double` method doubles both the `width` and `height` of the rectangle. The `print` method is used to display the rectangle at each step.
