@@ -1,6 +1,6 @@
 # 0x13-javascript_objects_scopes_closures
 
-![js](0x13-javascript_objects_scopes_closures)
+![js](https://biztecno.net/wp-content/uploads/2020/08/Biz-InfoTecno-Development-Full.png)
 # Resources 📑
 
 [ALL](https://intranet.alxswe.com/projects/304)
