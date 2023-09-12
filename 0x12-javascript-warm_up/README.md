@@ -70,14 +70,206 @@ Your original code is correct and accomplishes the task as described in your ini
 - If there are exactly 3 arguments, it prints "Argument found."
 - If there are more than 3 arguments, it prints "Arguments found"
 
+# associed information 
+You can create a Node.js script to accomplish this task by accessing and formatting the command-line arguments. Here's a JavaScript script that does what you're looking for:
+
+```javascript
+#!/usr/bin/node
+
+const arg1 = process.argv[2] || 'undefined';
+const arg2 = process.argv[3] || 'undefined';
+
+console.log(arg1 + ' is ' + arg2);
+```
+
+Save this script in a file named `4-concat.js` and make it executable using `chmod +x 4-concat.js`. Then, you can run it as shown in your examples:
+
+```bash
+./4-concat.js c cool
+./4-concat.js c
+./4-concat.js
+```
+
+This script checks if the command-line arguments are provided, and if not, it defaults them to 'undefined'. Then, it prints the formatted sentence with the two arguments in the specified format.
+
+# check NUMBERS
+
+You can create a Node.js script to accomplish this task by checking if the argument can be successfully converted to an integer using JavaScript's `parseInt` function. Here's a JavaScript script that does what you're looking for:
+
+```javascript
+#!/usr/bin/node
+
+const arg = process.argv[2];
+
+if (Number.isInteger(parseInt(arg))) {
+  console.log(`My number: ${parseInt(arg)}`);
+} else {
+  console.log('Not a number');
+}
+```
+
+Save this script in a file named `5-to_integer.js` and make it executable using `chmod +x 5-to_integer.js`. Then, you can run it as shown in your examples:
+
+```bash
+./5-to_integer.js
+./5-to_integer.js 89
+./5-to_integer.js "89"
+./5-to_integer.js 89.89
+./5-to_integer.js School
+```
+
+This script first attempts to convert the argument to an integer using `parseInt`. If the conversion is successful, it prints the formatted message with the integer. If the conversion fails, it prints "Not a number."
+
+# print list[]
+
+You can achieve this by using an array of strings and a loop, such as a `for` loop. Here's a JavaScript script that accomplishes the task:
+
+```javascript
+#!/usr/bin/node
+
+const languages = ["C is fun", "Python is cool", "JavaScript is amazing"];
+
+for (const language of languages) {
+  console.log(language);
+}
+```
+
+Save this script in a file named `6-multi_languages_loop.js` and make it executable using `chmod +x 6-multi_languages_loop.js`. Then, when you run it, it will print the desired output:
+
+```bash
+./6-multi_languages_loop.js
+```
+
+This script uses a `for...of` loop to iterate through the `languages` array and prints each element (string) in the array using `console.log`. It effectively prints the three lines as requested, one at a time.
+
+# print "..." miltiple time 
+
+You can create a Node.js script to accomplish this task by using a `for` loop to print "C is fun" the specified number of times. Here's a JavaScript script that does what you're looking for:
+
+```javascript
+#!/usr/bin/node
+
+const x = parseInt(process.argv[2]);
+
+if (isNaN(x)) {
+  console.log('Missing number of occurrences');
+} else {
+  for (let i = 0; i < x; i++) {
+    console.log('C is fun');
+  }
+}
+```
+
+Save this script in a file named `7-multi_c.js` and make it executable using `chmod +x 7-multi_c.js`. Then, you can run it as shown in your examples:
+
+```bash
+./7-multi_c.js 2
+./7-multi_c.js 5
+./7-multi_c.js
+./7-multi_c.js -3
+```
+
+Here's how the script works:
+
+1. It parses the first command-line argument as an integer using `parseInt(process.argv[2])`.
+
+2. If the parsed value is `NaN` (not a number), it prints "Missing number of occurrences."
+
+3. If the parsed value is a valid number, it enters a `for` loop and prints "C is fun" `x` times, where `x` is the parsed integer value.
+
+So, the script prints "C is fun" the specified number of times or displays an error message if the input is not a valid number.
+
+# SQUARE&print ⬜
+
+You can create a Node.js script to print a square using a loop. Here's a JavaScript script that does what you're looking for:
+
+```javascript
+#!/usr/bin/node
+
+const size = parseInt(process.argv[2]);
+
+if (isNaN(size)) {
+  console.log('Missing size');
+} else {
+  if (size > 0) {
+    for (let i = 0; i < size; i++) {
+      let row = '';
+      for (let j = 0; j < size; j++) {
+        row += 'X';
+      }
+      console.log(row);
+    }
+  }
+}
+```
+
+Save this script in a file named `8-square.js` and make it executable using `chmod +x 8-square.js`. Then, you can run it as shown in your examples:
+
+```bash
+./8-square.js
+./8-square.js School
+./8-square.js 2
+./8-square.js 6
+./8-square.js -3
+```
+
+Here's how the script works:
+
+1. It parses the first command-line argument as an integer using `parseInt(process.argv[2])`.
+
+2. If the parsed value is `NaN` (not a number), it prints "Missing size."
+
+3. If the parsed value is a valid positive integer, it enters a loop to print a square. Each row of the square consists of 'X' characters, and the number of rows and columns is equal to the `size` value.
+
+4. If the `size` value is not a positive integer or is zero, it won't print anything.
+
+So, the script prints a square of 'X' characters with the specified size, or it displays an error message if the input is not a valid positive integer.
+
+# add two numbers
+  
+You can create a Node.js script that adds two integers using a function. Here's a JavaScript script that accomplishes this task:
+
+```javascript
+#!/usr/bin/node
+
+function add(a, b) {
+  return a + b;
+}
+
+const num1 = parseInt(process.argv[2]);
+const num2 = parseInt(process.argv[3]);
+
+if (isNaN(num1) || isNaN(num2)) {
+  console.log('NaN');
+} else {
+  const result = add(num1, num2);
+  console.log(result);
+}
+```
+
+Save this script in a file named `9-add.js` and make it executable using `chmod +x 9-add.js`. Then, you can run it as shown in your examples:
+
+```bash
+./9-add.js
+./9-add.js 1
+./9-add.js 1 7
+./9-add.js 13 89
+```
+
+Here's how the script works:
+
+1. It defines a function `add(a, b)` that takes two arguments and returns their sum.
+
+2. It parses the first and second command-line arguments as integers using `parseInt()` and stores them in `num1` and `num2`.
+
+3. It checks if either `num1` or `num2` is `NaN` (not a number). If either of them is `NaN`, it prints "NaN."
+
+4. If both `num1` and `num2` are valid integers, it calls the `add()` function with these values, calculates the sum, and then prints the result.
+
 
 # Modern JavaScript Cheatsheet
 
 ![Modern JavaScript cheatsheet](https://i.imgur.com/aexPxMb.png)
-
-
-
-[![Tweet for help](https://img.shields.io/twitter/follow/mbeaudru?label=Tweet%20%40mbeaudru&style=social)](https://twitter.com/mbeaudru/)
 
 ## Introduction
 
