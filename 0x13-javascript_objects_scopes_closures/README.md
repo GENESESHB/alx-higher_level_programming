@@ -27,3 +27,38 @@ const r2 = new Rectangle();
 ```
 
 Make sure to specify the correct path to the "rectangle.js" file based on its actual location on your system.
+
+# vconstructor = attribute
+
+`Rectangle` class with a constructor that accepts `width` and `height` parameters. This class allows you to create instances of rectangles with specific dimensions. Your code is correct for defining such a class.
+
+Here's a breakdown of the code:
+
+```javascript
+#!/usr/bin/node
+module.exports = class Rectangle {
+  constructor(w, h) {
+    this.width = w;
+    this.height = h;
+  }
+};
+```
+
+- `#!/usr/bin/node`: This shebang indicates that the script should be executed using Node.js.
+
+- `module.exports`: This line exports the `Rectangle` class as a module so that it can be used in other JavaScript files.
+
+- `class Rectangle { ... }`: This is the class definition. It defines a `Rectangle` class with a constructor that takes two parameters, `w` (width) and `h` (height).
+
+- Inside the constructor, `this.width = w;` and `this.height = h;` set the `width` and `height` properties of the instance to the values passed as arguments.
+
+You can now create instances of the `Rectangle` class with specific dimensions like this:
+
+```javascript
+const Rectangle = require('./your-rectangle-file.js'); // Replace 'your-rectangle-file.js' with the actual filename.
+
+const myRectangle = new Rectangle(10, 20); // Create a rectangle with width 10 and height 20.
+
+console.log(myRectangle.width); // Output: 10
+console.log(myRectangle.height); // Output: 20
+```
