@@ -263,3 +263,74 @@ XXX
 ```
 
 In this output, `square1` has a size of 5, and `square2` has a size of 3. The `print` method of the `Rectangle` class is used to display the squares.
+
+# anather's methode `` for`` inhiretence
+
+Here's the code:
+
+```javascript
+#!/usr/bin/node
+module.exports = class Square extends require('./5-square.js') {
+  charPrint(c) {
+    if (c === undefined) {
+      this.print();
+    } else {
+      for (let i = 0; i < this.height; i++) console.log(c.repeat(this.width));
+    }
+  }
+};
+```
+
+This code defines a `Square` class that extends another class from the module `5-square.js`. It also includes a method called `charPrint(c)` that can be used to print a square made of a specific character `c`.
+
+Let's break down the code:
+
+1. `#!/usr/bin/node`: This is a shebang that indicates the script should be executed using Node.js.
+
+2. `module.exports`: This line exports the `Square` class as a module so that it can be used in other JavaScript files.
+
+3. `class Square extends require('./5-square.js')`: This line defines the `Square` class, which extends the class from the module `5-square.js`. This means that `Square` inherits the properties and methods of the class from the module.
+
+4. Inside the `Square` class, there is a method called `charPrint(c)`. This method takes one parameter `c`, which represents the character to use when printing the square.
+
+5. Inside the `charPrint` method, there is an `if` statement that checks if the `c` parameter is `undefined`. If `c` is not provided (undefined), it calls the `print` method of the parent class. If `c` is provided, it uses a loop to print a square made of the specified character `c` by repeating it `this.width` times on each line, for a total of `this.height` lines.
+
+Now, let's create an example script that uses this `Square` class and demonstrates its `charPrint` method:
+
+**Example Script (square.js):**
+
+```javascript
+const Square = require('./your-square-file.js'); // Replace 'your-square-file.js' with the actual filename.
+
+const square1 = new Square(5);
+console.log("Square 1:");
+square1.charPrint();
+
+const square2 = new Square(3);
+console.log("\nSquare 2:");
+square2.charPrint('*'); // Print square with '*' character
+```
+
+**Expected Output:**
+
+```
+Square 1:
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+XXXXX
+
+Square 2:
+***
+***
+***
+```
+
+In this example:
+
+- `square1` is created with a size of 5. When you call `square1.charPrint()`, it uses the default character ('X') to print a square of size 5x5.
+
+- `square2` is created with a size of 3. When you call `square2.charPrint('*')`, it prints a square of size 3x3 using the specified character ('*').
+
+The `charPrint` method allows you to print squares with custom characters or use the default character ('X') if no character is provided.
