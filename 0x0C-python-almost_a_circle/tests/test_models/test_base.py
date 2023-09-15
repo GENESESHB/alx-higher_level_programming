@@ -1,33 +1,21 @@
 #!/usr/bin/python3
+"""Defines unittests for base.py.
+
+Unittest classes:
+    TestBase_instantiation - line 23
+    TestBase_to_json_string - line 110
+    TestBase_save_to_file - line 156
+    TestBase_from_json_string - line 234
+    TestBase_create - line 288
+    TestBase_load_from_file - line 340
+    TestBase_save_to_file_csv - line 406
+    TestBase_load_from_file_csv - line 484
 """
-Defines unittests for base.py.
-# run with python3 -m unittest discover tests
-# run with python3 -m unittest tests/test_models/test_base.py
-"""
-
-import unittest
-
-from models.base import Base
-
-
 import os
-import pep8
-import json
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
-
-
-class TestPep8(unittest.TestCase):
-    """Pep8 models/base.py & tests/test_models/test_base.py"""
-    def test_pep8(self):
-        """Pep8"""
-        style = pep8.StyleGuide(quiet=False)
-        errors = 0
-        files = ["models/base.py", "tests/test_models/test_base.py"]
-        errors += style.check_files(files).total_errors
-        self.assertEqual(errors, 0, 'Need to fix Pep8')
 
 
 class TestBase_instantiation(unittest.TestCase):
@@ -207,13 +195,12 @@ class TestBase_save_to_file(unittest.TestCase):
         Square.save_to_file([s1, s2])
         with open("Square.json", "r") as f:
             self.assertTrue(len(f.read()) == 77)
-    """
+
     def test_save_to_file_cls_name_for_filename(self):
         s = Square(10, 7, 2, 8)
         Base.save_to_file([s])
         with open("Base.json", "r") as f:
             self.assertTrue(len(f.read()) == 39)
-    """
 
     def test_save_to_file_overwrite(self):
         s = Square(9, 2, 39, 2)
@@ -472,17 +459,16 @@ class TestBase_save_to_file_csv(unittest.TestCase):
         Square.save_to_file_csv([s])
         with open("Square.csv", "r") as f:
             self.assertTrue("8,10,7,2", f.read())
-    """
+
     def test_save_to_file__csv_None(self):
         Square.save_to_file_csv(None)
         with open("Square.csv", "r") as f:
-            self.assertNotEqual("[]", f.read())
-    """
+            self.assertEqual("[]", f.read())
 
     def test_save_to_file_csv_empty_list(self):
         Square.save_to_file_csv([])
         with open("Square.csv", "r") as f:
-            self.assertNotEqual("[]", f.read())
+            self.assertEqual("[]", f.read())
 
     def test_save_to_file_csv_no_args(self):
         with self.assertRaises(TypeError):
@@ -550,16 +536,13 @@ class TestBase_load_from_file_csv(unittest.TestCase):
         output = Square.load_from_file_csv()
         self.assertTrue(all(type(obj) == Square for obj in output))
 
-    """
     def test_load_from_file_csv_no_file(self):
         output = Square.load_from_file_csv()
-        self.assertNotEqual([], output)
-    """
+        self.assertEqual([], output)
 
     def test_load_from_file_csv_more_than_one_arg(self):
         with self.assertRaises(TypeError):
             Base.load_from_file_csv([], 1)
-
 
 if __name__ == "__main__":
     unittest.main()

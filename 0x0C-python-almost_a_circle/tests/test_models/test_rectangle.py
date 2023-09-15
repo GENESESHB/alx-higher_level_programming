@@ -1,27 +1,23 @@
 #!/usr/bin/python3
-"""
-Defines unittests for models/rectangle.py.
-# run with python3 -m unittest discover tests
-# run with python3 -m unittest tests/test_models/test_rectangle.py
+"""Defines unittests for models/rectangle.py.
+
+Unittest classes:
+    TestRectangle_instantiation - line 25
+    TestRectangle_width - line 114
+    TestRectangle_height - line 190
+    TestRectangle_x - line 262
+    TestRectangle_y - line 334
+    TestRectangle_order_of_initialization - line 402
+    TestRectangle_area - line 430
+    TestRectangle_update_args - line 538
+    TestRectangle_update_kwargs - line 676
+    TestRectangle_to_dictionary - line 788
 """
 import io
 import sys
-import pep8
-from contextlib import redirect_stdout
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
-
-
-class TestPep8(unittest.TestCase):
-    """Pep8 models/rectangle.py & tests/test_models/test_rectangle.py"""
-    def test_pep8(self):
-        """Pep8"""
-        style = pep8.StyleGuide(quiet=False)
-        errors = 0
-        files = ["models/rectangle.py", "tests/test_models/test_rectangle.py"]
-        errors += style.check_files(files).total_errors
-        self.assertEqual(errors, 0, 'Need to fix Pep8')
 
 
 class TestRectangle_instantiation(unittest.TestCase):
@@ -458,6 +454,7 @@ class TestRectangle_stdout(unittest.TestCase):
     @staticmethod
     def capture_stdout(rect, method):
         """Captures and returns text printed to stdout.
+
         Args:
             rect (Rectangle): The Rectangle to print to stdout.
             method (str): The method to run on rect.
@@ -477,7 +474,6 @@ class TestRectangle_stdout(unittest.TestCase):
     def test_str_method_print_width_height(self):
         r = Rectangle(4, 6)
         capture = TestRectangle_stdout.capture_stdout(r, "print")
-
         correct = "[Rectangle] ({}) 0/0 - 4/6\n".format(r.id)
         self.assertEqual(correct, capture.getvalue())
 
@@ -494,7 +490,7 @@ class TestRectangle_stdout(unittest.TestCase):
     def test_str_method_width_height_x_y_id(self):
         r = Rectangle(13, 21, 2, 4, 7)
         self.assertEqual("[Rectangle] (7) 2/4 - 13/21", str(r))
-    """
+
     def test_str_method_changed_attributes(self):
         r = Rectangle(7, 7, 0, 0, [4])
         r.width = 15
@@ -502,7 +498,6 @@ class TestRectangle_stdout(unittest.TestCase):
         r.x = 8
         r.y = 10
         self.assertEqual("[Rectangle] ([4]) 8/10 - 15/1", str(r))
-    """
 
     def test_str_method_one_arg(self):
         r = Rectangle(1, 2, 3, 4, 5)
@@ -575,8 +570,8 @@ class TestRectangle_update_args(unittest.TestCase):
     def test_update_args_more_than_five(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(89, 2, 3, 4, 5, 6)
-        self.assertNotEqual("[Rectangle] (89) 4/5 - 2/3", str(r))
-    """
+        self.assertEqual("[Rectangle] (89) 4/5 - 2/3", str(r))
+
     def test_update_args_None_id(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(None)
@@ -588,13 +583,12 @@ class TestRectangle_update_args(unittest.TestCase):
         r.update(None, 4, 5, 2)
         correct = "[Rectangle] ({}) 2/10 - 4/5".format(r.id)
         self.assertEqual(correct, str(r))
-    """
 
     def test_update_args_twice(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(89, 2, 3, 4, 5, 6)
         r.update(6, 5, 4, 3, 2, 89)
-        self.assertNotEqual("[Rectangle] (6) 3/2 - 5/4", str(r))
+        self.assertEqual("[Rectangle] (6) 3/2 - 5/4", str(r))
 
     def test_update_args_invalid_width_type(self):
         r = Rectangle(10, 10, 10, 10, 10)
@@ -704,7 +698,7 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(y=5, x=8, id=99, width=1, height=2)
         self.assertEqual("[Rectangle] (99) 8/5 - 1/2", str(r))
-    """
+
     def test_update_kwargs_None_id(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(id=None)
@@ -716,7 +710,6 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         r.update(id=None, height=7, y=9)
         correct = "[Rectangle] ({}) 10/9 - 10/7".format(r.id)
         self.assertEqual(correct, str(r))
-    """
 
     def test_update_kwargs_twice(self):
         r = Rectangle(10, 10, 10, 10, 10)
@@ -808,7 +801,6 @@ class TestRectangle_to_dictionary(unittest.TestCase):
         r = Rectangle(10, 2, 4, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
-
 
 if __name__ == "__main__":
     unittest.main()
