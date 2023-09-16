@@ -314,3 +314,79 @@ You can then run the script with the following command:
 ```
 
 This script connects to the MySQL server, retrieves data from the `cities` and `states` tables, and displays the results as specified in the example.
+
+# ``ALL cities by state``
+
+To create a script that lists all cities of a given state from the database `hbtn_0e_4_usa`, you can use the `MySQLdb` module in Python. Here's a script (`5-filter_cities.py`) that accomplishes this task safely, without SQL injection:
+
+```python
+#!/usr/bin/python3
+import MySQLdb
+import sys
+
+if __name__ == "__main__":
+    # Check for the correct number of command-line arguments
+    if len(sys.argv) != 5:
+        print("Usage: {} <username> <password> <database> <state_name>".format(sys.argv[0]))
+        sys.exit(1)
+
+    # Retrieve command-line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+    state_name = sys.argv[4]
+
+    # Connect to MySQL server
+    try:
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=username,
+            passwd=password,
+            db=database,
+            charset="utf8"
+        )
+
+        # Create a cursor object
+        cursor = db.cursor()
+
+        # Prepare the SQL query with a placeholder for the state_name
+        query = "SELECT cities.name FROM cities \
+                 JOIN states ON cities.state_id = states.id \
+                 WHERE states.name = %s \
+                 ORDER BY cities.id ASC"
+
+        # Execute the query with the provided state_name
+        cursor.execute(query, (state_name,))
+
+        # Fetch all rows
+        results = cursor.fetchall()
+
+        # Extract city names and join them with commas
+        city_names = ', '.join(row[0] for row in results)
+
+        # Display the results
+        print(city_names)
+
+        # Close the cursor and database connection
+        cursor.close()
+        db.close()
+
+    except MySQLdb.Error as e:
+        print("MySQL Error {}: {}".format(e.args[0], e.args[1]))
+        sys.exit(1)
+```
+
+Make sure the script is executable:
+
+```bash
+chmod +x 5-filter_cities.py
+```
+
+You can then run the script with the following command, providing the state name as an argument:
+
+```bash
+./5-filter_cities.py root root hbtn_0e_4_usa Texas
+```
+
+This script connects to the MySQL server, retrieves the city names for the specified state, and displays them as a comma-separated list, as shown in the example.
