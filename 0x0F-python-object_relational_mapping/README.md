@@ -443,4 +443,79 @@ class State(Base):
 - `id` is defined as a `Column` of type `Integer`, and it's set as the primary key of the table using `primary_key=True`. It's also set as not nullable using `nullable=False`, meaning it must have a value for every row. `autoincrement=True` indicates that this column is auto-incremented.
 - `name` is defined as a `Column` of type `String(128)` (a string with a maximum length of 128 characters). It's also set as not nullable.
 
-This code defines a SQLAlchemy model for a 'states' table, specifying the structure of the table and its columns. It's a declarative way to define the database schema in Python code, making it easier to work with databases using object-oriented programming principles.
+This code defines a SQLAlchemy model for a 'states' table, specifying the structure of the table and its columns. It's a declarative way to define the database schema in Python code, making it easier to work with databases using object-oriented programming principles
+
+# ``All states via SQLAlchemy``.
+
+Certainly! Let's go through the code step by step:
+
+1. Importing necessary modules and classes:
+```python
+#!/usr/bin/python3
+"""Lists all State objects from the database hbtn_0e_6_usa"""
+
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+   - This code starts with a shebang (`#!/usr/bin/python3`) to specify that the script should be executed using Python 3.
+   - It imports the required modules: `sys`, `create_engine`, `sessionmaker`, and the classes `Base` and `State` from the `model_state` module.
+
+2. Checking if the script is the main program:
+```python
+if __name__ == "__main__":
+```
+   - This conditional statement ensures that the following code block is only executed if this script is run as the main program, not when it's imported as a module.
+
+3. Retrieving command-line arguments:
+```python
+    # Get command-line arguments
+    db_username = sys.argv[1]
+    db_password = sys.argv[2]
+    db_name = sys.argv[3]
+```
+   - It retrieves the command-line arguments using `sys.argv`. The first argument (`sys.argv[0]`) is the script's filename, so `sys.argv[1]`, `sys.argv[2]`, and `sys.argv[3]` correspond to the MySQL username, password, and database name provided when running the script.
+
+4. Creating a database engine and session:
+```python
+    # Create a database connection
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(db_username, db_password, db_name),
+                           pool_pre_ping=True)
+```
+   - This code uses the `create_engine` function from SQLAlchemy to create a database engine. It uses the provided username, password, and database name to specify the database connection URL. The `pool_pre_ping=True` option ensures that the database connection is refreshed if it becomes stale.
+
+5. Creating a session:
+```python
+    # Create an SQLAlchemy session
+    Session = sessionmaker(bind=engine)
+    session = Session()
+```
+   - It creates an SQLAlchemy `Session` class tied to the previously created database engine and then creates an actual session object.
+
+6. Querying the database for State objects:
+```python
+    # Query the database to retrieve all State objects, ordered by their IDs
+    states = session.query(State).order_by(State.id).all()
+```
+   - This code uses the session to query the database and retrieve all `State` objects from the database table. The `order_by(State.id)` part ensures that the results are sorted by the `id` column in ascending order.
+
+7. Displaying the results:
+```python
+    # Display the results
+    for state in states:
+        print("{}: {}".format(state.id, state.name))
+```
+   - It iterates through the retrieved `State` objects and prints their `id` and `name` attributes.
+
+8. Closing the session:
+```python
+    # Close the session
+    session.close()
+```
+   - Finally, it closes the session to release resources and close the database connection.
+
+This script essentially connects to a MySQL database, retrieves a list of `State` objects, and prints them in ascending order by their IDs. It's a basic example of how to use SQLAlchemy to interact with a database in Python
+.
+
