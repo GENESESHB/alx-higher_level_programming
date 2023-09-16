@@ -390,3 +390,10 @@ You can then run the script with the following command, providing the state name
 ```
 
 This script connects to the MySQL server, retrieves the city names for the specified state, and displays them as a comma-separated list, as shown in the example.
+
+# ``First state model``
+
+#!/usr/bin/python3
+"""Start link class to table in database 
+"""
+
