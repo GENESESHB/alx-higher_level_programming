@@ -397,3 +397,50 @@ This script connects to the MySQL server, retrieves the city names for the speci
 """Start link class to table in database 
 """
 
+# `` First state model``
+
+Certainly! Let's break down the code in `model_state.py` step by step:
+
+```python
+#!/usr/bin/python3
+"""Start link class to table in database 
+"""
+```
+
+- This is a shebang line (`#!/usr/bin/python3`) that specifies the interpreter to be used when executing the script.
+- The triple double-quotes `"""` indicate a docstring, which is a way to provide documentation or comments about the code. In this case, it provides a brief description of the purpose of the script.
+
+```python
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+```
+
+- These lines import necessary modules and classes from SQLAlchemy, a popular Object-Relational Mapping (ORM) library for Python.
+- `Column`, `Integer`, and `String` are classes from SQLAlchemy used to define database table columns and their data types.
+- `declarative_base` is a function from SQLAlchemy that creates a base class for declarative class definitions.
+
+```python
+Base = declarative_base()
+```
+
+- Here, we create a `Base` instance by calling `declarative_base()`. This `Base` instance will be used as a base class for all the declarative class definitions in our SQLAlchemy models.
+
+```python
+class State(Base):
+    """Class that defines a State table"""
+    __tablename__ = 'states'
+```
+
+- We define a Python class named `State` that inherits from the `Base` class. This class represents a table in the database.
+- The `__tablename__` attribute is used to specify the name of the table in the database. In this case, it's set to 'states'.
+
+```python
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(128), nullable=False)
+```
+
+- Inside the `State` class, we define two class attributes: `id` and `name`.
+- `id` is defined as a `Column` of type `Integer`, and it's set as the primary key of the table using `primary_key=True`. It's also set as not nullable using `nullable=False`, meaning it must have a value for every row. `autoincrement=True` indicates that this column is auto-incremented.
+- `name` is defined as a `Column` of type `String(128)` (a string with a maximum length of 128 characters). It's also set as not nullable.
+
+This code defines a SQLAlchemy model for a 'states' table, specifying the structure of the table and its columns. It's a declarative way to define the database schema in Python code, making it easier to work with databases using object-oriented programming principles.
