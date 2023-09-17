@@ -519,3 +519,113 @@ if __name__ == "__main__":
 This script essentially connects to a MySQL database, retrieves a list of `State` objects, and prints them in ascending order by their IDs. It's a basic example of how to use SQLAlchemy to interact with a database in Python
 .
 
+# ``First state``
+
+Certainly! Let's go through the code line by line and explain each part along with the expected output.
+
+```python
+#!/usr/bin/python3
+```
+
+- This is a shebang line specifying that the script should be executed using the Python 3 interpreter.
+
+```python
+import sys
+```
+
+- This line imports the `sys` module, which provides access to command-line arguments and other system-related functions.
+
+```python
+from model_state import Base, State
+```
+
+- This line imports the `Base` and `State` classes from the `model_state` module. These classes are part of SQLAlchemy's ORM (Object-Relational Mapping) and represent the database tables.
+
+```python
+from sqlalchemy import create_engine
+```
+
+- This line imports the `create_engine` function from the SQLAlchemy library, which is used to create a connection to the database.
+
+```python
+from sqlalchemy.orm import sessionmaker
+```
+
+- This line imports the `sessionmaker` function from SQLAlchemy's ORM, which is used to create a configured "Session" class for interacting with the database.
+
+```python
+if __name__ == "__main__":
+```
+
+- This conditional block checks if the script is being run as the main program.
+
+```python
+    if len(sys.argv) != 4:
+        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
+        sys.exit(1)
+```
+
+- This part checks if the script is provided with the correct number of command-line arguments (4 in total: script name, username, password, and database name). If not, it prints a usage message and exits the script with a status code of 1.
+
+```python
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+```
+
+- These lines retrieve the values of the username, password, and database name from the command-line arguments.
+
+```python
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(username, password, database), pool_pre_ping=True)
+```
+
+- Here, an SQLAlchemy engine is created using the `create_engine` function. It specifies the connection URL to the MySQL database with the provided username, password, and database name. The `pool_pre_ping=True` argument enables connection pooling with ping for reconnections.
+
+```python
+    Session = sessionmaker(bind=engine)
+    session = Session()
+```
+
+- These lines create an SQLAlchemy session using the `sessionmaker` function and bind it to the previously created engine. This session will be used for database interactions.
+
+```python
+    first_state = session.query(State).order_by(State.id).first()
+```
+
+- This line queries the database using the session to retrieve the first `State` object. The `order_by(State.id)` part ensures that the results are sorted in ascending order by the `id` column.
+
+```python
+    if first_state:
+        print("{}: {}".format(first_state.id, first_state.name))
+    else:
+        print("Nothing")
+```
+
+- This part checks if a `first_state` object was found in the database. If a `State` object is found, it prints its `id` and `name` in the specified format. If no `State` object is found (the table is empty), it prints "Nothing."
+
+```python
+    session.close()
+```
+
+- Finally, the script closes the session to release the resources associated with it.
+
+Expected Output (example):
+
+Let's assume you run the script with the following command:
+
+```bash
+./8-model_state_fetch_first.py root root hbtn_0e_6_usa
+```
+
+- If there is a `State` object in the database, it will print something like:
+  ```
+  1: California
+  ```
+
+- If there are no `State` objects in the database (empty table), it will print:
+  ```
+  Nothing
+  ```
+
+The actual output will depend on the contents of the database and the provided command-line arguments.
+
