@@ -629,3 +629,464 @@ Let's assume you run the script with the following command:
 
 The actual output will depend on the contents of the database and the provided command-line arguments.
 
+# ``Contains `a```
+
+une explication ligne par ligne du code :
+
+```python
+#!/usr/bin/python3
+"""
+Script that lists all State objects that contain the letter 'a'
+from the database hbtn_0e_6_usa.
+"""
+```
+
+- La première ligne (`#!/usr/bin/python3`) est une ligne de shebang qui indique que le script doit être exécuté avec Python 3.
+- Les lignes entre `"""` sont des commentaires multilignes (docstring) qui expliquent brièvement ce que fait le script.
+
+```python
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+
+- Ces lignes importent les modules nécessaires pour le script.
+- `sys` est utilisé pour accéder aux arguments de ligne de commande.
+- `create_engine` est utilisé pour créer un moteur de base de données SQLAlchemy.
+- `sessionmaker` est utilisé pour créer une session SQLAlchemy.
+- `Base` et `State` sont importés depuis `model_state`, qui sont les classes SQLAlchemy liées à la base de données.
+
+```python
+if __name__ == "__main__":
+```
+
+- Cette ligne vérifie si le script est exécuté en tant que programme principal (et non en tant que module importé).
+
+```python
+engine = create_engine(
+    'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+    format(sys.argv[1], sys.argv[2], sys.argv[3]),
+    pool_pre_ping=True)
+```
+
+- Cette ligne crée un moteur de base de données SQLAlchemy pour se connecter à la base de données MySQL. Les informations de connexion (nom d'utilisateur, mot de passe, nom de la base de données) sont récupérées à partir des arguments de ligne de commande (`sys.argv`).
+- `pool_pre_ping=True` est utilisé pour effectuer un "ping" sur la base de données avant chaque requête pour vérifier si la connexion est toujours active.
+
+```python
+Session = sessionmaker(bind=engine)
+session = Session()
+```
+
+- Ces lignes créent une instance de session SQLAlchemy en utilisant le moteur de base de données que nous avons créé précédemment.
+
+```python
+states_with_a = session.query(State).filter(State.name.like('%a%')).order_by(State.id)
+```
+
+- Cette ligne effectue une requête SQL pour récupérer tous les objets `State` qui contiennent 'a' dans leur nom en utilisant la méthode `like`. Les résultats sont également triés par `State.id`.
+
+```python
+for state in states_with_a:
+    print("{}: {}".format(state.id, state.name))
+```
+
+- Ces lignes parcourent les résultats de la requête et affichent chaque objet `State` sous la forme "id: nom".
+
+```python
+session.close()
+```
+
+- Cette ligne ferme la session SQLAlchemy après avoir terminé de l'utiliser.
+
+C'est ainsi que fonctionne le script. Il se connecte à la base de données, exécute une requête pour récupérer les objets `State` correspondants, puis affiche les résultats.
+
+# ``Get state``
+
+Voici une explication ligne par ligne du code du script `10-model_state_my_get.py` :
+
+```python
+#!/usr/bin/python3
+"""
+Script that prints the State object with the name passed as an argument from
+the database hbtn_0e_6_usa.
+"""
+```
+
+- La première ligne (`#!/usr/bin/python3`) est une ligne de shebang qui indique que le script doit être exécuté avec Python 3.
+- Les lignes entre `"""` sont des commentaires multilignes (docstring) qui expliquent brièvement ce que fait le script.
+
+```python
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+
+- Ces lignes importent les modules nécessaires pour le script.
+- `sys` est utilisé pour accéder aux arguments de ligne de commande.
+- `create_engine` est utilisé pour créer un moteur de base de données SQLAlchemy.
+- `sessionmaker` est utilisé pour créer une session SQLAlchemy.
+- `Base` et `State` sont importés depuis `model_state`, qui sont les classes SQLAlchemy liées à la base de données.
+
+```python
+if __name__ == "__main__":
+```
+
+- Cette ligne vérifie si le script est exécuté en tant que programme principal (et non en tant que module importé).
+
+```python
+engine = create_engine(
+    'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+    format(sys.argv[1], sys.argv[2], sys.argv[3]),
+    pool_pre_ping=True)
+```
+
+- Cette ligne crée un moteur de base de données SQLAlchemy pour se connecter à la base de données MySQL. Les informations de connexion (nom d'utilisateur, mot de passe, nom de la base de données) sont récupérées à partir des arguments de ligne de commande (`sys.argv`).
+- `pool_pre_ping=True` est utilisé pour effectuer un "ping" sur la base de données avant chaque requête pour vérifier si la connexion est toujours active.
+
+```python
+Session = sessionmaker(bind=engine)
+session = Session()
+```
+
+- Ces lignes créent une instance de session SQLAlchemy en utilisant le moteur de base de données que nous avons créé précédemment.
+
+```python
+state_name = sys.argv[4]
+```
+
+- Cette ligne récupère le nom de l'État à rechercher à partir des arguments de ligne de commande.
+
+```python
+state = session.query(State).filter(State.name == state_name).first()
+```
+
+- Cette ligne effectue une requête SQL pour récupérer le premier objet `State` dont le nom correspond à `state_name`.
+
+```python
+if state:
+    print(state.id)
+else:
+    print("Not found")
+```
+
+- Ces lignes vérifient si un objet `State` a été trouvé. Si c'est le cas, elle affiche l'ID de cet objet. Sinon, elle affiche "Not found".
+
+```python
+session.close()
+```
+
+- Cette ligne ferme la session SQLAlchemy après avoir terminé de l'utiliser.
+
+C'est ainsi que fonctionne le script. Il se connecte à la base de données, recherche un État par son nom, puis affiche l'ID de l'État s'il est trouvé ou "Not found" sinon.
+
+# ``Add new state``
+
+Voici une explication ligne par ligne du code du script `11-model_state_insert.py` :
+
+```python
+#!/usr/bin/python3
+"""
+Script that adds the State object "Louisiana" to the database hbtn_0e_6_usa.
+"""
+```
+
+- La première ligne (`#!/usr/bin/python3`) est une ligne de shebang qui indique que le script doit être exécuté avec Python 3.
+- Les lignes entre `"""` sont des commentaires multilignes (docstring) qui expliquent brièvement ce que fait le script.
+
+```python
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+
+- Ces lignes importent les modules nécessaires pour le script.
+- `sys` est utilisé pour accéder aux arguments de ligne de commande.
+- `create_engine` est utilisé pour créer un moteur de base de données SQLAlchemy.
+- `sessionmaker` est utilisé pour créer une session SQLAlchemy.
+- `Base` et `State` sont importés depuis `model_state`, qui sont les classes SQLAlchemy liées à la base de données.
+
+```python
+if __name__ == "__main__":
+```
+
+- Cette ligne vérifie si le script est exécuté en tant que programme principal (et non en tant que module importé).
+
+```python
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+        format(sys.argv[1], sys.argv[2], sys.argv[3]),
+        pool_pre_ping=True)
+```
+
+- Cette ligne crée un moteur de base de données SQLAlchemy pour se connecter à la base de données MySQL. Les informations de connexion (nom d'utilisateur, mot de passe, nom de la base de données) sont récupérées à partir des arguments de ligne de commande (`sys.argv`).
+- `pool_pre_ping=True` est utilisé pour effectuer un "ping" sur la base de données avant chaque requête pour vérifier si la connexion est toujours active.
+
+```python
+    Session = sessionmaker(bind=engine)
+    session = Session()
+```
+
+- Ces lignes créent une instance de session SQLAlchemy en utilisant le moteur de base de données que nous avons créé précédemment.
+
+```python
+    new_state = State(name="Louisiana")
+```
+
+- Cette ligne crée un nouvel objet `State` avec le nom "Louisiana".
+
+```python
+    session.add(new_state)
+```
+
+- Cette ligne ajoute l'objet `new_state` à la session SQLAlchemy.
+
+```python
+    session.commit()
+```
+
+- Cette ligne valide et committe les changements à la base de données.
+
+```python
+    print(new_state.id)
+```
+
+- Cette ligne affiche l'ID de la nouvelle entrée (l'État "Louisiana") dans la base de données.
+
+```python
+    session.close()
+```
+
+- Cette ligne ferme la session SQLAlchemy après avoir terminé de l'utiliser.
+
+C'est ainsi que fonctionne le script. Il se connecte à la base de données, ajoute un nouvel État ("Louisiana") à la base de données, affiche l'ID de la nouvelle entrée, puis ferme la session.
+
+# ``Updat state``
+
+Voici une explication ligne par ligne du code du script `12-model_state_update_id_2.py` :
+
+```python
+#!/usr/bin/python3
+"""
+Script that changes the name of a State object from the database hbtn_0e_6_usa.
+"""
+```
+
+- La première ligne (`#!/usr/bin/python3`) est une ligne de shebang qui indique que le script doit être exécuté avec Python 3.
+- Les lignes entre `"""` sont des commentaires multilignes (docstring) qui expliquent brièvement ce que fait le script.
+
+```python
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+
+- Ces lignes importent les modules nécessaires pour le script.
+- `sys` est utilisé pour accéder aux arguments de ligne de commande.
+- `create_engine` est utilisé pour créer un moteur de base de données SQLAlchemy.
+- `sessionmaker` est utilisé pour créer une session SQLAlchemy.
+- `Base` et `State` sont importés depuis `model_state`, qui sont les classes SQLAlchemy liées à la base de données.
+
+```python
+if __name__ == "__main__":
+```
+
+- Cette ligne vérifie si le script est exécuté en tant que programme principal (et non en tant que module importé).
+
+```python
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+        format(sys.argv[1], sys.argv[2], sys.argv[3]),
+        pool_pre_ping=True)
+```
+
+- Cette ligne crée un moteur de base de données SQLAlchemy pour se connecter à la base de données MySQL. Les informations de connexion (nom d'utilisateur, mot de passe, nom de la base de données) sont récupérées à partir des arguments de ligne de commande (`sys.argv`).
+- `pool_pre_ping=True` est utilisé pour effectuer un "ping" sur la base de données avant chaque requête pour vérifier si la connexion est toujours active.
+
+```python
+    Session = sessionmaker(bind=engine)
+    session = Session()
+```
+
+- Ces lignes créent une instance de session SQLAlchemy en utilisant le moteur de base de données que nous avons créé précédemment.
+
+```python
+    state_to_update = session.query(State).filter(State.id == 2).first()
+```
+
+- Cette ligne effectue une requête pour récupérer l'objet `State` avec un ID de 2 dans la base de données.
+
+```python
+    if state_to_update is not None:
+        state_to_update.name = "New Mexico"
+```
+
+- Si l'objet `state_to_update` existe (c'est-à-dire qu'un État avec un ID de 2 a été trouvé), alors son nom est mis à jour avec "New Mexico".
+
+```python
+        session.commit()
+```
+
+- Cette ligne valide et committe les changements à la base de données.
+
+```python
+    session.close()
+```
+
+- Cette ligne ferme la session SQLAlchemy après avoir terminé de l'utiliser.
+
+C'est ainsi que fonctionne le script. Il se connecte à la base de données, recherche un État avec un ID de 2, met à jour son nom en "New Mexico" s'il existe, puis committe les changements et ferme la session.
+
+# ``Dlete state``
+
+Voici une explication ligne par ligne du code du script `13-model_state_delete_a.py` :
+
+```python
+#!/usr/bin/python3
+"""
+Script that deletes all State objects with a name containing the letter a
+from the database hbtn_0e_6_usa.
+"""
+```
+
+- La première ligne (`#!/usr/bin/python3`) est une ligne de shebang qui indique que le script doit être exécuté avec Python 3.
+- Les lignes entre `"""` sont des commentaires multilignes (docstring) qui expliquent brièvement ce que fait le script.
+
+```python
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+```
+
+- Ces lignes importent les modules nécessaires pour le script.
+- `sys` est utilisé pour accéder aux arguments de ligne de commande.
+- `create_engine` est utilisé pour créer un moteur de base de données SQLAlchemy.
+- `sessionmaker` est utilisé pour créer une session SQLAlchemy.
+- `Base` et `State` sont importés depuis `model_state`, qui sont les classes SQLAlchemy liées à la base de données.
+
+```python
+if __name__ == "__main__":
+```
+
+- Cette ligne vérifie si le script est exécuté en tant que programme principal (et non en tant que module importé).
+
+```python
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+        format(sys.argv[1], sys.argv[2], sys.argv[3]),
+        pool_pre_ping=True)
+```
+
+- Cette ligne crée un moteur de base de données SQLAlchemy pour se connecter à la base de données MySQL. Les informations de connexion (nom d'utilisateur, mot de passe, nom de la base de données) sont récupérées à partir des arguments de ligne de commande (`sys.argv`).
+- `pool_pre_ping=True` est utilisé pour effectuer un "ping" sur la base de données avant chaque requête pour vérifier si la connexion est toujours active.
+
+```python
+    Session = sessionmaker(bind=engine)
+    session = Session()
+```
+
+- Ces lignes créent une instance de session SQLAlchemy en utilisant le moteur de base de données que nous avons créé précédemment.
+
+```python
+    states_to_delete = session.query(State).filter(State.name.like('%a%')).all()
+```
+
+- Cette ligne effectue une requête pour récupérer tous les objets `State` dont le nom contient la lettre 'a' dans la base de données.
+
+```python
+    for state in states_to_delete:
+        session.delete(state)
+```
+
+- Cette boucle parcourt la liste des États à supprimer et les supprime un par un de la session SQLAlchemy.
+
+```python
+    session.commit()
+```
+
+- Cette ligne valide et committe les changements à la base de données.
+
+```python
+    session.close()
+```
+
+- Cette ligne ferme la session SQLAlchemy après avoir terminé de l'utiliser.
+
+C'est ainsi que fonctionne le script. Il se connecte à la base de données, recherche tous les États dont le nom contient la lettre 'a', les supprime de la base de données, puis committe les changements et ferme la session.
+
+# ``Cities in state``
+
+Voici le code du fichier `model_city.py` qui contient la définition de la classe `City` :
+
+```python
+#!/usr/bin/python3
+"""
+This module defines the City class.
+"""
+
+from sqlalchemy import Column, Integer, String, ForeignKey
+from model_state import Base
+
+class City(Base):
+    """
+    City class that inherits from Base.
+    Represents the "cities" table in the database.
+    """
+    __tablename__ = 'cities'
+    id = Column(Integer, primary_key=True, nullable=False, unique=True)
+    name = Column(String(128), nullable=False)
+    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
+```
+
+- La classe `City` hérite de la classe `Base` de SQLAlchemy.
+- La variable `__tablename__` est utilisée pour spécifier le nom de la table de base de données correspondante.
+- `id` est une colonne de type entier, clé primaire, ne peut pas être nulle et est unique.
+- `name` est une colonne de type chaîne de caractères de 128 caractères maximum, ne peut pas être nulle.
+- `state_id` est une colonne de type entier, clé étrangère liée à la table 'states', ne peut pas être nulle.
+
+Ensuite, voici le code du fichier `14-model_city_fetch_by_state.py` qui utilise cette classe pour extraire et afficher les objets `City` de la base de données :
+
+```python
+#!/usr/bin/python3
+"""
+Script that prints all City objects from the database hbtn_0e_14_usa.
+"""
+
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_city import Base, City
+from model_state import State
+
+if __name__ == "__main__":
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'.
+        format(sys.argv[1], sys.argv[2], sys.argv[3]),
+        pool_pre_ping=True)
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    cities = session.query(City).order_by(City.id).all()
+
+    for city in cities:
+        state = session.query(State).filter_by(id=city.state_id).first()
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
+
+    session.close()
+```
+
+Ce script se connecte à la base de données, extrait tous les objets `City`, puis affiche chaque ville avec le nom de l'État auquel elle appartient. Les résultats sont triés par `City.id`.
+
+Pour exécuter le script, vous devez lui passer en argument le nom d'utilisateur MySQL, le mot de passe MySQL et le nom de la base de données. Par exemple :
+
+```
+./14-model_city_fetch_by_state.py root root hbtn_0e_14_usa
+```
+
+Cela affichera toutes les villes avec le nom de l'État auquel elles appartiennent, triées par identifiant de ville.
+
