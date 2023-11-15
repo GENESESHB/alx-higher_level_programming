@@ -1,4 +1,4 @@
-[hb](https://i.ytimg.com/vi/S3cBIww_6os/maxresdefault.jpg)
+#![hb](https://i.ytimg.com/vi/S3cBIww_6os/maxresdefault.jpg)
 
 # 0x13. Javascript - Objects, Scopes and Closures
 
