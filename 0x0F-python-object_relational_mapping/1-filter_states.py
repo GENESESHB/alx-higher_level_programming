@@ -1,6 +1,7 @@
 #!/usr/bin/python3
+
 """
-Script that listes all states with a name starting 
+Script that listes all states with a name starting
 with N  from DB
 """
 
@@ -13,7 +14,8 @@ if __name__ == "__main__":
     of arguments
     """
     if len(sys.argv) != 4:
-        print("Usage: {} <mysql_username> <mysql_password> <database_name>".format(sys.argv[0]))
+        print("Usage: {} <mysql_username> <mysql_password> \
+                <database_name>".format(sys.argv[0]))
         sys.exit(1)
 
     mysql_username = sys.argv[1]
@@ -24,11 +26,11 @@ if __name__ == "__main__":
     connect to MYSQL-SERVER
     """
     db = MySQLdb.connect(
-            host = "localhost",
-            port = 3306,
-            user = mysql_username,
-            passwd = mysql_password,
-            db = database_name
+            host="localhost",
+            port=3306,
+            user=mysql_username,
+            passwd=mysql_password,
+            db=database_name
             )
 
     """
@@ -40,7 +42,7 @@ if __name__ == "__main__":
     excute the query to select states starting with 'N'
     """
     cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY ID ASC")
-    rows =  cursor.fetchall()
+    rows = cursor.fetchall()
     for row in rows:
         print(row)
 
