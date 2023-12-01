@@ -3,11 +3,12 @@
 import urllib.request
 
 
-if __name__ == "__main__":
-    request = urllib.request.Request("https://intranet.hbtn.io/status")
+url = 'https://intranet.hbtn.io/status'
+request = urllib.request.Request(url)
+request.add_header('User-Agent', 'Mozilla/5.0')
+
+try:
     with urllib.request.urlopen(request) as response:
-        body = response.read()
-        print("Body response:")
-        print("\t- type: {}".format(type(body)))
-        print("\t- content: {}".format(body))
-        print("\t- utf8 content: {}".format(body.decode("utf-8")))
+        print(response.read().decode('utf-8'))
+except urllib.error.HTTPError as e:
+    print(f"HTTPError: {e}")
