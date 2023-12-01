@@ -1,4 +1,5 @@
-![python](https://onlinelibrary.wiley.com/cms/asset/feb658ac-f010-40e1-9a51-d99f56a8f63e/eva12839-fig-0002-m.jpg)
+![ python_network ](https://onlinelibrary.wiley.com/cms/asset/feb658ac-f010-40e1-9a51-d99f56a8f63e/eva12839-fig-0002-m.jpg)
+
 # Python - Network #1
 
 This project involved learning how to use the `urllib` and `requests` Python
