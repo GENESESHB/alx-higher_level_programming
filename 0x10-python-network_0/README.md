@@ -1,4 +1,4 @@
-![python](i.ytimg.com/vi/Hkvdm4kMggo/maxresdefault.jpg)
+![python_id](i.ytimg.com/vi/Hkvdm4kMggo/maxresdefault.jpg)
 # 0x10-python-network_0
 
 In this networking project, I used `curl` in Bash scripts to send various types
